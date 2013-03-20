@@ -280,6 +280,8 @@ If a function relies on one or two other functions that are not useful to any ot
 
 ## 2. Making Kittens Fly with JavaScript
 
+[Jeff's class](http://kittens.jenius.me/)
+
 ### A look at jQuery
 
 To make sure the DOM is ready:
@@ -734,4 +736,168 @@ We can also use a for each loop:
           console.log(tweet.text);
         });
       }
+    });
+
+##### AJAX Promises and async functions
+
+By default, when running an AJAX request jQuery will continue executing the rest of your code. This can lead to some problems if you are calling the response of this request somewhere else in your code (you may be calling it before the request has had the time to return). Here are couple ways you could handle this:
+
+    $.ajax({
+      url: 'http://search.twitter.com/search.json?q=nyan%20cat',
+      type: 'GET',
+      dataType: 'jsonp',
+      error: function(){
+        console.log('Failed request. So sad.');
+      },
+      success: parseData // using a callback function
+    });
+
+    function parseData(data){
+      data.results.forEach(function(tweet){
+        console.log(tweet.text);
+      });
+    }
+
+Or, you can use a promise:
+
+    $.ajax({
+      url: 'http://search.twitter.com/search.json?q=nyan%20cat',
+      type: 'GET',
+      dataType: 'jsonp',
+      error: function(){
+        console.log('Failed request. So sad.');
+      }}).done(function (data) {
+        parseData(data);
+    });
+
+    function parseData(data){
+      data.results.forEach(function(tweet){
+        console.log(tweet.text);
+      });
+    }
+
+This is an example straight from the jQuery API page on AJAX:
+
+    // Assign handlers immediately after making the request,
+    // and remember the jqxhr object for this request
+    var jqxhr = $.ajax( "example.php" )
+        .done(function() { alert("success"); })
+        .fail(function() { alert("error"); })
+        .always(function() { alert("complete"); });
+     
+    // perform other work here ...
+     
+    // Set another completion function for the request above
+    jqxhr.always(function() { alert("second complete"); });
+
+
+#### CSS Transitions
+
+Here is an example of how to set up an animation using CSS:
+
+    .ball {
+      -webkit-transition: margin-left 1s ease, width .5s ease, height .5s ease;
+    }
+
+    #stage:hover .ball{
+      margin-left: 94%;
+      width: 100px;
+      height: 100px;
+    }
+
+You can also fire it with jQuery:
+
+    $(function(){
+
+      $('h1').on('click', function(){
+        $('.ball').toggleClass('right');
+      });
+
+    });
+
+You can also add a callback post-animation -- here it is with the jQuery function .bind():
+
+    $(function(){
+
+      $('h1').on('click', function(){
+        $('.ball').toggleClass('right');
+      });
+
+      $('.ball').bind("webkitTransitionEnd", function() {console.log("foo");});
+
+    });
+
+You can also use "this" to refer to the element in question:
+
+    $('.ball').bind("webkitTransitionEnd", function() {
+      console.log("foo");
+      $(this).css( {background: 'pink'} );
+    });
+
+
+
+## 3. Eloquent JS
+
+Uppercase letters are always 'less' than lowercase ones.
+
+    "a" > "Z" => true
+    "a" > "z" => false
+
+Floats can often give you trouble due to the way numbers are calculated in JS.
+
+    0.1 * 0.2 => 0.020000000000000004
+
+Typeof tells you the type of whatever you pass in.
+
+    typeof(4.5);  => "number"
+    typeof(true); => "boolean"
+
+Generally speaking, when there is no semi-colon ";" we are creating an expression. When we add a semi-colon ";" we are creating a statment.
+
+    1;        => this is a statement
+    !false;   => so is this
+
+Values given to functions are called parameters or arguments.
+
+    alert("Avocados");
+
+
+## General Assembly
+
+indexOf helps us find if an item is present in an array.
+
+    colors = ['red', 'green', 'blue'];
+    myColor = 'red'
+
+    colors.indexOf(myColor);
+
+To get the value of something you can use .attr():
+
+    $('html').attr('lan');
+
+To set the value:
+
+    $('html').attr('lan', 'fr');
+
+You can also add attributes:
+
+    $('html').attr('title', 'this is a new attribute called title');
+
+
+Duplicate property from one object into another one:
+
+    for(var k in secondObject) firstObject[k] = secondObject[k];
+
+Prevent default
+
+    $('body').click(function(event) {
+      console.log(event);
+      event.preventDefault();
+    });
+
+Stop propagation
+    
+    $('body').click(function(event) {
+      console.log(event);
+      event.stopPropagation();
     });
