@@ -835,34 +835,7 @@ You can also use "this" to refer to the element in question:
     });
 
 
-
-## 3. Eloquent JS
-
-Uppercase letters are always 'less' than lowercase ones.
-
-    "a" > "Z" => true
-    "a" > "z" => false
-
-Floats can often give you trouble due to the way numbers are calculated in JS.
-
-    0.1 * 0.2 => 0.020000000000000004
-
-Typeof tells you the type of whatever you pass in.
-
-    typeof(4.5);  => "number"
-    typeof(true); => "boolean"
-
-Generally speaking, when there is no semi-colon ";" we are creating an expression. When we add a semi-colon ";" we are creating a statment.
-
-    1;        => this is a statement
-    !false;   => so is this
-
-Values given to functions are called parameters or arguments.
-
-    alert("Avocados");
-
-
-## General Assembly
+## 3. General Assembly
 
 indexOf helps us find if an item is present in an array.
 
@@ -901,3 +874,47 @@ Stop propagation
       console.log(event);
       event.stopPropagation();
     });
+
+
+
+## 4. Eloquent JS
+
+Uppercase letters are always 'less' than lowercase ones.
+
+    "a" > "Z" => true
+    "a" > "z" => false
+
+Floats can often give you trouble due to the way numbers are calculated in JS.
+
+    0.1 * 0.2 => 0.020000000000000004
+
+Typeof tells you the type of whatever you pass in.
+
+    typeof(4.5);  => "number"
+    typeof(true); => "boolean"
+
+Generally speaking, when there is no semi-colon ";" we are creating an expression. When we add a semi-colon ";" we are creating a statment.
+
+    1;        => this is a statement
+    !false;   => so is this
+
+Values given to functions are called parameters or arguments.
+
+    alert("Avocados");
+
+Recursive functions can make use of the stack
+
+    function power(base, exponent) {
+      if (exponent === 0) {
+        return 1;
+      } else {
+        return base * power(base, exponent - 1);
+      }
+    }
+
+The operator in can be used to test whether an object has a certain property. It produces a boolean.
+
+    var chineseBox = {};
+    chineseBox.content = chineseBox;
+    show("content" in chineseBox);
+    show("content" in chineseBox.content)
