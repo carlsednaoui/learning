@@ -875,6 +875,59 @@ Stop propagation
       event.stopPropagation();
     });
 
+To compare dates, you need to use the .getTime() function.
+    
+    dateOne = new Date();
+    dateTwo = new Date();
+
+    dateOne == dateOne;                        => true
+    dateOne == dateTwo;                        => false
+
+    dateOne.getTime() == dateTwo.getTime();    => true
+
+
+Another way to look at for loops:
+
+    newArray = [1,2,3,4,5,6];
+    for (var numX in newArray) { console.log(newArray[numX]) };
+
+Note about the above, each i is passed as a string!
+
+    function sum(arr) {
+       result = 0;
+       for (el in arr) {
+         console.log(typeof(el));
+         result += el;
+       }
+       return result;
+    }
+
+    //There you can see that each element is a string, to fix this use:
+
+    function sum(arr) {
+       result = 0;
+       for (el in arr) {
+         result += Number(el);
+       }
+       return result;
+    }
+
+    //Another option is to simply do:
+
+    function sum(arr) {
+       result = 0;
+       for (var i =0; i <= arr.length; i++) {
+         result += arr[1];
+       }
+       return result;
+    }
+
+Whenever a function is called in JS, it receives a variable called arguments.
+
+    function argCounter() { console.log("I have this many arguments:", arguments.length); };
+    argCounter("carl", "andres", "jp");     => "I have this many arguments: 3"
+
+
 
 
 ## 4. Eloquent JS
