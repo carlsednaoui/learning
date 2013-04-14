@@ -835,7 +835,48 @@ You can also use "this" to refer to the element in question:
     });
 
 
-## 3. General Assembly
+## 3. Eloquent JS
+
+Uppercase letters are always 'less' than lowercase ones.
+
+    "a" > "Z" => true
+    "a" > "z" => false
+
+Floats can often give you trouble due to the way numbers are calculated in JS.
+
+    0.1 * 0.2 => 0.020000000000000004
+
+Typeof tells you the type of whatever you pass in.
+
+    typeof(4.5);  => "number"
+    typeof(true); => "boolean"
+
+Generally speaking, when there is no semi-colon ";" we are creating an expression. When we add a semi-colon ";" we are creating a statment.
+
+    1;        => this is a statement
+    !false;   => so is this
+
+Values given to functions are called parameters or arguments.
+
+    alert("Avocados");
+
+Recursive functions can make use of the stack
+
+    function power(base, exponent) {
+      if (exponent === 0) {
+        return 1;
+      } else {
+        return base * power(base, exponent - 1);
+      }
+    }
+
+The operator in can be used to test whether an object has a certain property. It produces a boolean.
+
+    var chineseBox = {};
+    chineseBox.content = chineseBox;
+    show("content" in chineseBox);
+    show("content" in chineseBox.content)
+
 
 indexOf helps us find if an item is present in an array.
 
@@ -928,46 +969,73 @@ Whenever a function is called in JS, it receives a variable called arguments.
     argCounter("carl", "andres", "jp");     => "I have this many arguments: 3"
 
 
+Raising an exception somewhat resembles a super-charged return from a function ― it does not just jump out of the current function, but also out of its callers, all the way up to the top-level call that started the current execution. This is called unwinding the stack.
 
+    function lastEl(arr) {
+       if (arr.length > 0)
+          return arr[arr.length-1];
+       else
+          throw "error mister";
+    }
 
-## 4. Eloquent JS
+    function lastElPlusTen(arr) {
+       return lastEl(arr) + 10;
+    }
 
-Uppercase letters are always 'less' than lowercase ones.
+    try { console.log( lastElPlusTen([]) ) }
+    catch (error) { console.log("Oh noes, something went wrong: ", error) }
 
-    "a" > "Z" => true
-    "a" > "z" => false
+If you always want a block of code to execute after an error, use finally.
 
-Floats can often give you trouble due to the way numbers are calculated in JS.
+    function processThing(thing) {
+      if (currentThing != null)
+        throw "Oh no! We are already processing a thing!";
 
-    0.1 * 0.2 => 0.020000000000000004
-
-Typeof tells you the type of whatever you pass in.
-
-    typeof(4.5);  => "number"
-    typeof(true); => "boolean"
-
-Generally speaking, when there is no semi-colon ";" we are creating an expression. When we add a semi-colon ";" we are creating a statment.
-
-    1;        => this is a statement
-    !false;   => so is this
-
-Values given to functions are called parameters or arguments.
-
-    alert("Avocados");
-
-Recursive functions can make use of the stack
-
-    function power(base, exponent) {
-      if (exponent === 0) {
-        return 1;
-      } else {
-        return base * power(base, exponent - 1);
+      currentThing = thing;
+      try {
+        /* do complicated processing... */
+      }
+      finally {
+        currentThing = null;
       }
     }
 
-The operator in can be used to test whether an object has a certain property. It produces a boolean.
+You can also read the error message property:
 
-    var chineseBox = {};
-    chineseBox.content = chineseBox;
-    show("content" in chineseBox);
-    show("content" in chineseBox.content)
+    try {
+      print(Sasquatch);
+    }
+    catch (error) {
+      print("Caught: " + error.message);
+    }
+
+More examples of throw, try, catch, finally:
+
+    function printIt(thing) {
+       if (thing !== true) {
+          throw thing;
+       }
+       console.log("printint the true thing: " + thing);
+    }
+
+    try {
+       printIt(true);
+    } catch(e) {
+       console.log("there is an error: " + e.message);
+    } finally {
+       console.log("well, the finally is final");
+    }
+
+Chapter 6:
+
+Write a function countZeroes, which takes an array of numbers as its argument and returns the amount of zeroes that occur in it. Use reduce.
+
+    array = [0,0,0,0,1,2,3,4,0]
+
+    function countZeroes(arr) {
+       return arr.reduce(function(accum, item) {
+          return item === 0 ? accum.concat(item) : accum;
+       }, []).length
+    }
+
+    countZeroes(array);
