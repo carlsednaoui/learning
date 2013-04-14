@@ -1,0 +1,20 @@
+.images a:link, 
+.images a:visited {
+  display: block;
+  text-indent: -9999px;
+}
+
+.images a:link,
+.images a:visited {
+  width: 160px;
+  height: 160px;
+  background: url(sprite.png) top left no-repeat;
+}
+
+.images a:hover {
+  background-position: 0 -160px;
+}
+
+.images a:active {
+  background-position: 0 -320px;
+}
