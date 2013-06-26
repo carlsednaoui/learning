@@ -67,7 +67,6 @@ function processBold(text, boldPositions) {
     processedText += (i === boldPositions.length - 1 ? text.substr(0) : '');
   }
 
-  console.log(processedText);
   return processedText;
 }
 
