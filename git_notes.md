@@ -95,3 +95,8 @@ Rebasing
       # Applying: new_branch_feature commit 1
     git checkout master
     git merge new_branch_feature --no-ff
+
+Other
+    
+    git merge --squash
+    python -m SimpleHTTPServer
