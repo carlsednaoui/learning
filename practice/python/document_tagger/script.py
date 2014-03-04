@@ -5,6 +5,7 @@ import re
 
 import texts
 print texts.a
+print "************************************"
 
 book_1 = texts.divine_comedy
 
@@ -51,7 +52,6 @@ raw_author = author_matcher.findall(book_1)[0]
 clean_author_2 = cleaner_matcher.sub(' ', raw_author)
 
 raw_translator = translator_matcher.search(book_1)
-# print raw_translator.groups()[0]
 clean_translator_2 = cleaner_matcher.sub(' ', raw_translator.groups()[0])
 
 print clean_title_2
